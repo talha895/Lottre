@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jeeto khelo Lottery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #000;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      text-align: center;
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 30px 30px;
+      animation: stars 50s linear infinite;
+    }
+
+    @keyframes stars {
+      0% {background-position: 0 0;}
+      100% {background-position: 1000px 1000px;}
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 30px;
+      color: gold;
+      text-shadow: 2px 2px 5px #fff;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .box {
+      width: 180px;
+      min-height: 120px;
+      padding: 15px;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(255, 255, 255, 0.2);
+    }
+
+    .box.on {
+      background: linear-gradient(145deg, #004400, #00aa00);
+      color: #fff700;
+      box-shadow: 0 0 15px 3px lime;
+    }
+
+    .box.of {
+      background: linear-gradient(145deg, #330000, #660000);
+      color: white;
+      box-shadow: 0 0 10px 2px red;
+    }
+
+    .box h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .box p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .info {
+      display: none;
+    }
+
+    .box.on .info {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1> 50 Rs 1 Lottery</h1>
+
+  <div class="container" id="boxContainer"></div>
+
+  <script>
+    const boxesData = [
+      { id: 1, name: 'wahid', result: 'try again', status: 'on' },
+      { id: 2, name: 'talha sajid', result: 'Rs 200', status: 'on' },
+      { id: 3, name: 'sajid', result: 'try again', status: 'on' },
+      { id: 4, name: 'talha', result: 'try again', status: 'of' },
+      { id: 5, name: 'sajid', result: 'RS 200', status: 'of' },
+      { id: 6, name: 'talha', result: 'try again', status: 'of' },
+      { id: 7, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 8, name: 'talha', result: 'try again', status: 'of' },
+      { id: 9, name: 'sajid', result: 'RS 200', status: 'of' },
+	      { id: 10, name: 'talha', result: 'try again', status: 'of' },
+      { id: 11, name: 'sajid', result: 'RS 200', status: 'of' },
+       {id: 12, name: 'talha', result: 'Rs 200', status: 'of' },
+             { id: 13, name: 'talha', result: 'try again', status: 'of' },
+      { id: 14, name: 'wahid', result: 'try again', status: 'of' },
+      { id: 15, name: 'talha', result: 'Rs 200', status: 'of' },
+      { id: 16, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 17, name: 'talha', result: 'try again', status: 'of' },
+      { id: 18, name: 'sajid', result: 'RS 200', status: 'of' },
+      { id: 19, name: 'talha', result: 'try again', status: 'of' },
+      { id: 20, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 21, name: 'talha', result: 'try again', status: 'of' },
+      { id: 22, name: 'sajid', result: 'RS 200', status: 'of' },
+	      { id: 23, name: 'talha', result: 'try again', status: 'of' },
+      { id: 24, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 25, name: 'talha', result: 'try again', status: 'of' },
+      { id: 26, name: 'sajid', result: 'RS 200', status: 'of' },
+      { id: 27, name: 'talha', result: 'try again', status: 'of' },
+      { id: 28, name: 'sajid', result: 'RS 200', status: 'of' },
+       {id: 29, name: 'talha', result: 'Rs 200', status: 'of' },
+             { id: 30, name: 'talha', result: 'try again', status: 'of' },
+      { id: 31, name: 'wahid', result: 'try again', status: 'of' },
+      { id: 32, name: 'talha', result: 'Rs 200', status: 'of' },
+      { id: 33, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 34, name: 'talha', result: 'try again', status: 'of' },
+      { id: 35, name: 'sajid', result: 'RS 200', status: 'of' },
+      { id: 36, name: 'talha', result: 'try again', status: 'of' },
+      { id: 37, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 38, name: 'talha', result: 'try again', status: 'of' },
+      { id: 39, name: 'sajid', result: 'RS 200', status: 'of' },
+	      { id: 40, name: 'talha', result: 'try again', status: 'of' },
+      { id: 41, name: 'sajid', result: 'RS 200', status: 'of' },
+       {id: 42, name: 'talha', result: 'Rs 200', status: 'of' },
+             { id: 43, name: 'talha', result: 'try again', status: 'of' },
+      { id: 44, name: 'wahid', result: 'try again', status: 'of' },
+      { id: 45, name: 'talha', result: 'Rs 200', status: 'of' },
+      { id: 46, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 47, name: 'talha', result: 'try again', status: 'of' },
+      { id: 48, name: 'sajid', result: 'RS 200', status: 'of' },
+      { id: 49, name: 'talha', result: 'try again', status: 'of' },
+      { id: 40, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 51, name: 'talha', result: 'try again', status: 'of' },
+      { id: 52, name: 'sajid', result: 'RS 200', status: 'of' },
+	      { id: 53, name: 'talha', result: 'try again', status: 'of' },
+      { id: 54, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 55, name: 'talha', result: 'try again', status: 'of' },
+      { id: 56, name: 'sajid', result: 'RS 200', status: 'of' },
+      { id: 57, name: 'talha', result: 'try again', status: 'of' },
+      { id: 58, name: 'sajid', result: 'RS 200', status: 'of' },
+       {id: 59, name: 'talha', result: 'Rs 200', status: 'of' },
+             { id: 60, name: 'talha', result: 'try again', status: 'of' },
+      { id: 61, name: 'wahid', result: 'try again', status: 'of' },
+      { id: 62, name: 'talha', result: 'Rs 200', status: 'of' },
+      { id: 63, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 64, name: 'talha', result: 'try again', status: 'of' },
+      { id: 65, name: 'sajid', result: 'RS 200', status: 'of' },
+      { id: 66, name: 'talha', result: 'try again', status: 'of' },
+      { id: 67, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 68, name: 'talha', result: 'try again', status: 'of' },
+      { id: 69, name: 'sajid', result: 'RS 200', status: 'of' },
+	      { id: 70, name: 'talha', result: 'try again', status: 'of' },{ id: 70, name: 'talha', result: 'try again', status: 'of' },
+      { id: 71, name: 'sajid', result: 'RS 200', status: 'of' },
+       {id: 72, name: 'talha', result: 'Rs 200', status: 'of' },
+             { id: 73, name: 'talha', result: 'try again', status: 'of' },
+      { id: 74, name: 'wahid', result: 'try again', status: 'of' },
+      { id: 75, name: 'talha', result: 'Rs 200', status: 'of' },
+      { id: 76, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 77, name: 'talha', result: 'try again', status: 'of' },
+      { id: 78, name: 'sajid', result: 'RS 200', status: 'of' },
+      { id: 79, name: 'talha', result: 'try again', status: 'of' },
+      { id: 80, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 81, name: 'talha', result: 'try again', status: 'of' },
+      { id: 82, name: 'sajid', result: 'RS 200', status: 'of' },
+	      { id: 83, name: 'talha', result: 'try again', status: 'of' },
+      { id: 84, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 85, name: 'talha', result: 'try again', status: 'of' },
+      { id: 86, name: 'sajid', result: 'RS 200', status: 'of' },
+      { id: 87, name: 'talha', result: 'try again', status: 'of' },
+      { id: 88, name: 'sajid', result: 'RS 200', status: 'of' },
+       {id: 89, name: 'talha', result: 'Rs 200', status: 'of' },
+             { id: 90, name: 'talha', result: 'try again', status: 'of' },
+      { id: 91, name: 'wahid', result: 'try again', status: 'of' },
+      { id: 92, name: 'talha', result: 'Rs 200', status: 'of' },
+      { id: 93, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 94, name: 'talha', result: 'try again', status: 'of' },
+      { id: 95, name: 'sajid', result: 'RS 200', status: 'of' },
+      { id: 96, name: 'talha', result: 'try again', status: 'of' },
+      { id: 97, name: 'sajid', result: 'try again', status: 'of' },
+      { id: 98, name: 'talha', result: 'try again', status: 'of' },
+      { id: 99, name: 'sajid', result: 'RS 200', status: 'of' },
+	      { id: 100, name: 'talha', result: 'try again', status: 'of' },
+      ];
+
+    const container = document.getElementById("boxContainer");
+
+    boxesData.forEach(box => {
+      const div = document.createElement("div");
+      div.className = `box ${box.status}`;
+      div.innerHTML = `
+        <h3>Box ${box.id}</h3>
+        <div class="info">
+          <p><strong>Name:</strong> ${box.name}</p>
+          <p><strong>You:</strong> ${box.result}</p>
+          <p><strong>Status:</strong> ${box.status.toUpperCase()}</p>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+  </script>
+
+</body>
+</html>
